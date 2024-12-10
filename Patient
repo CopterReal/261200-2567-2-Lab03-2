@@ -1,0 +1,103 @@
+public class Patient {
+
+    private int id;
+    private String name;
+    private int birthYear;
+    private double height; // in cm
+    private double weight; // in kg
+    private String bloodGroup; // new field for blood group
+    private String phoneNumber; // new field for phone number
+
+    public Patient(int id, String name, int birthYear, double height, double weight, String bloodGroup, String phoneNumber) {
+        this.id = id;
+        this.name = name;
+
+
+        if (birthYear < 0) {
+            System.out.println("Negative birthYear detected. Converting to positive.");
+            this.birthYear = -birthYear;
+        } else {
+            this.birthYear = birthYear;
+        }
+
+
+        if (height < 0) {
+            System.out.println("Negative height detected. Converting to positive.");
+            this.height = -height;
+        } else {
+            this.height = height;
+        }
+
+
+        if (weight < 0) {
+            System.out.println("Negative weight detected. Converting to positive.");
+            this.weight = -weight;
+        } else {
+            this.weight = weight;
+        }
+
+        this.bloodGroup = bloodGroup;
+        this.phoneNumber = phoneNumber;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getBirthYear() {
+        return birthYear;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public String getBloodGroup() {
+        return bloodGroup;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+
+    public int getAge(int currentYear) {
+        if (currentYear <= birthYear) {
+            System.out.println("Invalid currentYear. Cannot calculate age.");
+            return 0;
+        }
+        return currentYear - birthYear;
+    }
+
+
+    public double getBMI() {
+        if (height <= 0 || weight <= 0) {
+            System.out.println("Invalid height or weight. Cannot calculate BMI.");
+            return 0.0;
+        }
+        // Convert height from cm to meters for BMI calculation
+        double heightInMeters = height / 100.0;
+        return weight / (heightInMeters * heightInMeters);
+    }
+
+
+    public void displayDetails(int currentYear) {
+        System.out.println("Patient Name: " + name);
+        System.out.println("Patient Age: " + getAge(currentYear));
+        System.out.println("Patient Height (cm): " + height);
+        System.out.println("Patient Weight (kg): " + weight);
+        System.out.println("Patient Blood Group: " + bloodGroup);
+        System.out.println("Patient Phone Number: " + phoneNumber);
+        System.out.println("Patient BMI: " + getBMI());
+    }
+}
+
